@@ -6,10 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script>
-    const r=10
+    const rawInput = prompt('달러 단위의 금액을 입력해주세요')
+ const d = Number(rawInput)
 
-    console.log(`width=${3.14*r*r}`)
-    console.log(`round=${2*3.14*r}`)
+ let output=''
+ output +=`달러 : ${d}\n`
+ output +=`-> 원화 : ${d*1207}\n`
+
+ 
+
+ alert(output)
   </script>
 </head>
 <body>
