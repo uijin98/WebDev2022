@@ -6,16 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script>
-    const rawInput = prompt('달러 단위의 금액을 입력해주세요')
- const d = Number(rawInput)
+   const a=Number(prompt('숫자를 입력해주세요.',''))
 
- let output=''
- output +=`달러 : ${d}\n`
- output +=`-> 원화 : ${d*1207}\n`
-
- 
-
- alert(output)
+   if(a%2==0){
+    alert('입력한 숫자는 짝수입니다')
+   }else if(a==0){
+    alert('입력한 숫자는 0입니다.')
+   }else{
+    alert('입력한 숫자는 홀수입니다.')
+   }
   </script>
 </head>
 <body>
