@@ -6,15 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script>
-   const a=Number(prompt('숫자를 입력해주세요.',''))
+   const input = prompt('숫자를 입력해주세요','')
+   const number = Number(input)
 
-   if(a%2==0){
-    alert('입력한 숫자는 짝수입니다')
-   }else if(a==0){
-    alert('입력한 숫자는 0입니다.')
-   }else{
-    alert('입력한 숫자는 홀수입니다.')
-   }
+   const result = (number>=0)?'0이상의 숫자입니다':'0보다 작은 숫자입니다'
+   alert(result)
   </script>
 </head>
 <body>
