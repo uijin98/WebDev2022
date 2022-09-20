@@ -1,10 +1,9 @@
-import datetime
+A=int(input("숫자 입력:"))
+B=int(input("숫자 입력:"))
 
-now=datetime.datetime.now()
-
-print(now.year,"년")
-print(now.month,"월")
-print(now.day, "일")
-print(now.hour,"시")
-print(now.minute,"분")
-print(now.second,"초")
+if A>B :
+    print(">")
+if A<B:
+    print("<")
+if A==B:
+    print("==")
