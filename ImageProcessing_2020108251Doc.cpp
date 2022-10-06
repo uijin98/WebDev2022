@@ -171,11 +171,11 @@ BOOL CImageProcessing2020108251Doc::OnOpenDocument(LPCTSTR lpszPathName)
 	}
 	m_size = m_width * m_height;
 
-	m_Inputimage = new unsigned char[m_size];
+	m_InputImage = new unsigned char[m_size];
 
 	for (int i = 0; i<m_size; i++)
-		m_Inputimage[i] = 255;
-	File.Read(m_Inputimage, m_size);
+		m_InputImage[i] = 255;
+	File.Read(m_InputImage, m_size);
 	File.Close();
 
 	return TRUE;
@@ -194,7 +194,7 @@ BOOL CImageProcessing2020108251Doc::OnSaveDocument(LPCTSTR lpszPathName)
 		File.Open(SaveDlg.GetPathName(), CFile::modeCreate |
 			CFile::modeWrite);
 		//파일 열기
-		File.Write(m_Inputimage, m_size); //파일 쓰기
+		File.Write(m_InputImage, m_size); //파일 쓰기
 		File.Close(); //  파일 닫기
 	}
 	return CDocument::OnSaveDocument(lpszPathName);
@@ -215,7 +215,7 @@ void CImageProcessing2020108251Doc::OnDownSampling()
 		for (i = 0; i < m_Re_height; i++) {
 			for (j = 0; j < m_Re_width; j++) {
 				m_OutputImage[i * m_Re_width + j]
-					= m_Inputimage[(i * dlg.m_DownSampleRate * m_width) + dlg.m_DownSampleRate * j];
+					= m_InputImage[(i * dlg.m_DownSampleRate * m_width) + dlg.m_DownSampleRate * j];
 			}
 		}
 	}
@@ -242,6 +242,88 @@ void CImageProcessing2020108251Doc::OnSumConstant()
 
 			else
 				m_OutputImage[i] = (unsigned char)(m_InputImage[i] + dlg.m_Constant);
+		}
+	}
+}
+
+
+void CImageProcessing2020108251Doc::OnSubConstant()
+{
+	// TODO: 여기에 구현 코드 추가.
+	CConstantDlg dlg;
+
+	int i;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	if (dlg.DoModal() == IDOK) {
+		for (i = 0; i < m_size; i++) {
+			if (m_InputImage[i] - dlg.m_Constant < 0)
+				m_OutputImage[i] = 0;
+
+			else
+				m_OutputImage[i]
+				= (unsigned char)(m_InputImage[i] - dlg.m_Constant);
+		}
+	}
+}
+
+
+void CImageProcessing2020108251Doc::OnMulConstant()
+{
+	// TODO: 여기에 구현 코드 추가.
+	CConstantDlg dlg;
+
+	int i;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	if (dlg.DoModal() == IDOK) {
+		for (i = 0; i < m_size; i++) {
+			if (m_InputImage[i] * dlg.m_Constant >255)
+				m_OutputImage[i] = 255;
+			else if (m_InputImage[i] * dlg.m_Constant <0)
+				m_OutputImage[i] = 0;
+
+			else
+				m_OutputImage[i]
+				= (unsigned char)(m_InputImage[i] * dlg.m_Constant);
+		}
+	}
+}
+
+
+void CImageProcessing2020108251Doc::OnDivConstant()
+{
+	// TODO: 여기에 구현 코드 추가.
+	CConstantDlg dlg;
+
+	int i;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	if (dlg.DoModal() == IDOK) {
+		for (i = 0; i < m_size; i++) {
+			if (m_InputImage[i] / dlg.m_Constant > 255)
+				m_OutputImage[i] = 255;
+			else if (m_InputImage[i] / dlg.m_Constant < 0)
+				m_OutputImage[i] = 0;
+
+			else
+				m_OutputImage[i]
+				= (unsigned char)(m_InputImage[i] / dlg.m_Constant);
 		}
 	}
 }
