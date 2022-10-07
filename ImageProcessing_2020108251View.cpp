@@ -29,6 +29,10 @@ BEGIN_MESSAGE_MAP(CImageProcessing2020108251View, CView)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
 	ON_COMMAND(ID_DownSample, &CImageProcessing2020108251View::OnDownsample)
 	ON_COMMAND(ID_SUM_CONSTANT, &CImageProcessing2020108251View::OnSumConstant)
+//	ON_COMMAND(ID_32776, &CImageProcessing2020108251View::OnMulConstant)
+	ON_COMMAND(ID_SUB_CONSTANT, &CImageProcessing2020108251View::OnSubConstant)
+	ON_COMMAND(ID_DIV_CONSTANT, &CImageProcessing2020108251View::OnDivConstant)
+	ON_COMMAND(ID_MUL_CONSTANT, &CImageProcessing2020108251View::OnMulConstant)
 END_MESSAGE_MAP()
 
 // CImageProcessing2020108251View 생성/소멸
@@ -66,7 +70,7 @@ void CImageProcessing2020108251View::OnDraw(CDC* pDC)
 
 	for (i = 0; i < pDoc->m_height; i++) {
 		for (j = 0; j < pDoc->m_width; j++) {
-			R = G = B = pDoc->m_Inputimage[i * pDoc->m_width + j];
+			R = G = B = pDoc->m_InputImage[i * pDoc->m_width + j];
 			pDC->SetPixel(j + 5, i + 5, RGB(R, G, B));
 		}
 	}
@@ -75,7 +79,7 @@ void CImageProcessing2020108251View::OnDraw(CDC* pDC)
 	for (i = 0; i < pDoc->m_Re_height; i++) {
 		for (j = 0; j<pDoc->m_Re_width; j++) {
 			R = pDoc->m_OutputImage[i * pDoc->m_Re_width + j];
-			G = B = R;
+			G = B = 0;
 			pDC->SetPixel(j + pDoc->m_width + 10, i + 5, RGB(R, G, B));
 		}
 	}
@@ -156,6 +160,56 @@ void CImageProcessing2020108251View::OnSumConstant()
 
 	ASSERT_VALID(pDoc);
 	pDoc->OnSumConstant();
+
+	Invalidate(TRUE);
+}
+
+void CImageProcessing2020108251View::OnSubConstant()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnSubConstant();
+
+	Invalidate(TRUE);
+}
+
+
+
+//void CImageProcessing2020108251View::OnMulConstant()
+//{
+//	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+//	CImageProcessing2020108251Doc* pDoc = GetDocument();
+//
+//	ASSERT_VALID(pDoc);
+//	pDoc->OnMulConstant();
+//
+//	Invalidate(TRUE);
+//}
+
+
+
+
+void CImageProcessing2020108251View::OnDivConstant()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnDivConstant();
+
+	Invalidate(TRUE);
+}
+
+
+void CImageProcessing2020108251View::OnMulConstant()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnMulConstant();
 
 	Invalidate(TRUE);
 }
