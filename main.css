@@ -1,0 +1,101 @@
+@import "reset.css";
+
+body {
+    background-color: black;
+    color: white;
+}
+a {
+    color: white;
+    text-decoration-line: none;
+}
+
+.container {
+    display: flex;
+    vertical-align:baseline;
+    justify-content: space-between;
+}
+
+.home {
+    margin: 20px;
+    font-size: 3em;
+    font-family:Georgia;
+}
+
+.top_list >.item {
+    display: inline-block;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+    font-size: 1.3em;
+}
+
+.top_list_2 >.item {
+    display: inline-block;
+    margin-left: 40px;
+    margin-top: 50px;
+    font-size: 1.3em;
+}
+.top_list_2 >:nth-child(2){
+    margin-right: 90px;
+}
+
+.left_list {
+    margin-top: 100px;
+    margin-left: 70px;
+    font-size: 1.2em;
+}
+
+.left_list :nth-child(2) {
+    margin-top: 50px;
+}
+
+.screen {
+    position: absolute;
+     left: 300px;
+     top: 150px;
+     width: 80%;
+     height: 800px;   
+     border: 1px solid #a9a9ac;
+     background-color:#a9a9ac;
+     opacity: 0.8;
+
+ }
+
+ /*main*/
+ 
+.env_grid3{
+    display:grid;
+      grid-template-columns:780px;
+      grid-template-rows:600px 180px;
+      grid-gap:20px;
+}
+
+
+.main_images{
+    width: 100%;
+    padding:20px;
+    background-color:#464548;
+    border:1px solid #464548;
+}
+
+.env_heart{
+    width:26px;
+    height:26px;
+    background-color:#fff;
+    border:1px sloid #fff;
+    margin-top:0px;
+    margin-left:1300px;
+    bottom:33%;    
+  }
+
+  .heart_btn{
+    background: url('../KakaoTalk_20221010_205641856.png') no-repeat -26px -261px;
+  }
+
+.main_title{
+
+}
+
+.main_autor{
+
+}
