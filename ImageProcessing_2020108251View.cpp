@@ -33,6 +33,13 @@ BEGIN_MESSAGE_MAP(CImageProcessing2020108251View, CView)
 	ON_COMMAND(ID_SUB_CONSTANT, &CImageProcessing2020108251View::OnSubConstant)
 	ON_COMMAND(ID_DIV_CONSTANT, &CImageProcessing2020108251View::OnDivConstant)
 	ON_COMMAND(ID_MUL_CONSTANT, &CImageProcessing2020108251View::OnMulConstant)
+	ON_COMMAND(ID_UP_SAMPLING, &CImageProcessing2020108251View::OnUpSampling)
+	ON_COMMAND(ID_AND_OPERATE, &CImageProcessing2020108251View::OnAndOperate)
+	ON_COMMAND(ID_OR_OPERATE, &CImageProcessing2020108251View::OnOrOperate)
+	ON_COMMAND(ID_XOR_OPERATE, &CImageProcessing2020108251View::OnXorOperate)
+	ON_COMMAND(ID_NEGA_TRANSFORM, &CImageProcessing2020108251View::OnNegaTransform)
+	ON_COMMAND(ID_GAMMA_CORRECTION, &CImageProcessing2020108251View::OnGammaCorrection)
+	ON_COMMAND(ID_BINARIZATION, &CImageProcessing2020108251View::OnBinarization)
 END_MESSAGE_MAP()
 
 // CImageProcessing2020108251View 생성/소멸
@@ -79,7 +86,7 @@ void CImageProcessing2020108251View::OnDraw(CDC* pDC)
 	for (i = 0; i < pDoc->m_Re_height; i++) {
 		for (j = 0; j<pDoc->m_Re_width; j++) {
 			R = pDoc->m_OutputImage[i * pDoc->m_Re_width + j];
-			G = B = 0;
+			G = B = R;
 			pDC->SetPixel(j + pDoc->m_width + 10, i + 5, RGB(R, G, B));
 		}
 	}
@@ -212,4 +219,88 @@ void CImageProcessing2020108251View::OnMulConstant()
 	pDoc->OnMulConstant();
 
 	Invalidate(TRUE);
+}
+
+
+void CImageProcessing2020108251View::OnUpSampling()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnUpSampling();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnAndOperate()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnAndOperate();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnOrOperate()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnOrOperate();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnXorOperate()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnXorOperate();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnNegaTransform()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnNegaTransform();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnGammaCorrection()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnGammaCorrection();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnBinarization()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnBinarization();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 }
