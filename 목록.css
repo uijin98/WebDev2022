@@ -1,0 +1,124 @@
+@import "reset.css";
+
+body {
+    background-color: black;
+    color: white;
+}
+a {
+    color: white;
+    text-decoration-line: none;
+}
+
+.container {
+    display: flex;
+    vertical-align:baseline;
+    justify-content: space-between;
+}
+
+.home {
+    margin: 20px;
+    font-size: 3em;
+    font-family:Georgia;
+}
+
+.top_list >.item {
+    display: inline-block;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+    font-size: 1.3em;
+}
+
+.top_list_2 >.item {
+    display: inline-block;
+    margin-left: 40px;
+    margin-top: 50px;
+    font-size: 1.3em;
+}
+.top_list_2 >:nth-child(2){
+    margin-right: 90px;
+}
+
+.left_list {
+    margin-top: 100px;
+    margin-left: 70px;
+    font-size: 1.2em;
+}
+
+.left_list :nth-child(2) {
+    margin-top: 50px;
+}
+
+/*환경보호방법 목록*/
+.env_grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,300px);
+  grid-auto-rows:400px;
+  /*justify-content:center;*/
+  margin-left:300px;
+  grid-gap:10px;
+  }
+
+/*컨텐츠 영역*/
+.env_grid>div{
+      width:100%
+      border:1px solid #c5c4c9;
+      background-color: #c5c4c9;
+      padding:20px;
+      font-size:1.0em;
+      display:flex;
+  }
+
+/*이미지 부분*/
+.env_grid2{
+      display:grid;
+      grid-template-columns:280px;
+      grid-template-rows:250px 80px;
+      grid-gap:20px;
+  }
+
+.env_grid2>div{
+  display:flex;
+  width: 217px;
+  padding:20px;
+  background-color:#929196;
+  border:1px solid #929196;
+}
+/*
+input.img-button{
+  background:url("/newearth/138533.png")no-repeat;
+  border:none;
+  width:80%;
+  height:150%;
+  cursor:pointer;
+}
+*/
+
+.hi{
+  position:relative;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+
+}
+
+.env_heart{
+  width:24px;
+  height:24px;
+  background-color:#fff;
+  border:1px sloid #fff;
+  margin-top:0px;
+  position:absolute;
+  right:5%;
+  bottom:33%;
+  
+}
+
+.heart_btn{
+  background: url('../KakaoTalk_20221010_205641856.png') no-repeat -26px -261px;
+}
+
+.content_title{
+  position: absolute;
+}
