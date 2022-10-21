@@ -15,6 +15,7 @@
 #include <propkey.h>
 #include "CDownSampleDlg.h"
 #include "CConstantDlg.h"
+#include "CUpSampleDlg.h"
 
 
 #ifdef _DEBUG
@@ -321,9 +322,363 @@ void CImageProcessing2020108251Doc::OnDivConstant()
 			else if (m_InputImage[i] / dlg.m_Constant < 0)
 				m_OutputImage[i] = 0;
 
-			else
+			else {
 				m_OutputImage[i]
-				= (unsigned char)(m_InputImage[i] / dlg.m_Constant);
+					= (unsigned char)(m_InputImage[i] / dlg.m_Constant);
+			}
 		}
 	}
 }
+
+
+void CImageProcessing2020108251Doc::OnUpSampling()
+{
+	int i, j;
+	CUpSampleDlg dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+		m_Re_height = m_height * dlg.m_UpSampleRate;
+		m_Re_width = m_width * dlg.m_UpSampleRate;
+		m_Re_size = m_Re_height * m_Re_width;
+		m_OutputImage = new unsigned char[m_Re_size];
+
+		for (i = 0; i < m_Re_size; i++)
+			m_OutputImage[i] = 0;
+
+		for (i = 0; i < m_height; i++) {
+			for (j = 0; j < m_width; j++) {
+				m_OutputImage[(i * dlg.m_UpSampleRate * m_Re_width) + dlg.m_UpSampleRate * j]
+					= m_InputImage[i * m_width + j];
+			}
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnAndOperate()
+{
+	CConstantDlg dlg;
+	int i;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	if (dlg.DoModal() == IDOK) {
+		for (i = 0; i < m_size; i++) {
+			if ((m_InputImage[i] & (unsigned char)dlg.m_Constant) >= 255)
+			{
+				m_OutputImage[i] = 255;
+			}
+			else if ((m_InputImage[i] & (unsigned char) dlg.m_Constant) < 0)
+			{
+				m_OutputImage[i] = 0;
+			}
+
+			else {
+				m_OutputImage[i]= (m_InputImage[i] & (unsigned char)dlg.m_Constant);
+					
+			}
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnOrOperate()
+{
+	CConstantDlg dlg;
+	int i;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	if (dlg.DoModal() == IDOK) {
+		for (i = 0; i < m_size; i++) {
+			if ((m_InputImage[i] | (unsigned char)dlg.m_Constant) >= 255)
+			{
+				m_OutputImage[i] = 255;
+			}
+			else if ((m_InputImage[i] | (unsigned char) dlg.m_Constant) < 0)
+			{
+				m_OutputImage[i] = 0;
+			}
+
+			else {
+				m_OutputImage[i] = (m_InputImage[i] | (unsigned char)dlg.m_Constant);
+
+			}
+		}
+	}
+
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnXorOperate()
+{
+	CConstantDlg dlg;
+	int i;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	if (dlg.DoModal() == IDOK) {
+		for (i = 0; i < m_size; i++) {
+			if ((m_InputImage[i] ^ (unsigned char)dlg.m_Constant) >= 255)
+			{
+				m_OutputImage[i] = 255;
+			}
+			else if ((m_InputImage[i] ^ (unsigned char) dlg.m_Constant) < 0)
+			{
+				m_OutputImage[i] = 0;
+			}
+
+			else {
+				m_OutputImage[i] = (m_InputImage[i]	^ (unsigned char)dlg.m_Constant);
+
+			}
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnNegaTransform()
+{
+	int i;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	for (i = 0; i < m_size; i++)
+		m_OutputImage[i] = 255 - m_InputImage[i];
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnGammaCorrection()
+{
+	CConstantDlg dlg;
+
+	int i;
+	double temp;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	if (dlg.DoModal() == IDOK) {
+		for (i = 0; i < m_size; i++) {
+			temp = pow(m_InputImage[i], 1 / dlg.m_Constant);
+
+			if (temp < 0)
+				m_OutputImage[i] = 0;
+			else if (temp > 255)
+				m_OutputImage[i] = 255;
+			else
+				m_OutputImage[i] = (unsigned char)temp;
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnBinarization()
+{
+	CConstantDlg dlg;
+
+	int i;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	if (dlg.DoModal() == IDOK) {
+		for (i = 0; i < m_size; i++) {
+			if (m_InputImage[i] >= dlg.m_Constant)
+				m_OutputImage[i] = 255;
+			else
+				m_OutputImage[i] = 0;
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnQuantization()
+{
+	CConstantDlg dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+		int i, j, value, LEVEL;
+		double HIGH, * TEMP;
+
+		m_Re_height = m_height;
+		m_Re_width = m_width;
+		m_Re_size = m_Re_height * m_Re_width;
+
+		m_OutputImage = new unsigned char[m_Re_size];
+		
+		TEMP = new double[m_size];
+
+		LEVEL = 256;
+		HIGH = 256;
+
+		value = (int)pow(2, dlg.m_Constant);
+
+		for (i = 0; i < m_size; i++) {
+			for (j = 0; j < value; j++) {
+				if (m_InputImage[i] >= (LEVEL / value) * j &&
+					m_InputImage[i] < (LEVEL / value) * (j + 1)) {
+					TEMP[i] = (double)(HIGH / value) * j;
+				}
+			}
+		}
+		for (i = 0; i < m_size; i++) {
+			m_OutputImage[i] = (unsigned char)TEMP[i];
+		}
+	}
+	
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnHistoStrech()
+{
+	int i;
+	unsigned char LOW, HIGH, MAX, MIN;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	LOW = 0;
+	HIGH = 255;
+
+	MIN = m_InputImage[0];
+	MAX = m_InputImage[0];
+
+	for (i = 0; i < m_size; i++) {
+		if (m_InputImage[i] < MIN)
+			MIN = m_InputImage[i];
+	}
+
+	for (i = 0; i < m_size; i++) {
+		if (m_InputImage[i] > MAX)
+			MAX = m_InputImage[i];
+	}
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	for (i = 0; i < m_size; i++)
+		m_OutputImage[i] = (unsigned char)((m_InputImage[i] -
+			MIN) * HIGH / (MAX - MIN));
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnEndInStrech()
+{
+	int i;
+	unsigned char LOW, HIGH, MAX, MIN;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	LOW = 0;
+	HIGH = 255;
+
+	MIN = m_InputImage[0];
+	MAX = m_InputImage[0];
+
+	for (i = 0; i < m_size; i++) {
+		if (m_InputImage[i] < MIN)
+			MIN = m_InputImage[i];
+	}
+
+	for (i = 0; i < m_size; i++) {
+		if (m_InputImage[i] > MAX)
+			MAX = m_InputImage[i];
+	}
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	for (i = 0; i < m_size; i++)
+		m_OutputImage[i] = (unsigned char)((m_InputImage[i] -
+			MIN) * HIGH / (MAX - MIN));
+
+	for (i = 0; i < m_size; i++) {
+		if (m_InputImage[i] <= MIN) {
+			m_OutputImage[i] = 0;
+		}
+
+		else if (m_InputImage[i] >= MAX) {
+			m_OutputImage[i] = 255;
+		}
+
+		else
+			m_OutputImage[i] = (unsigned char)((m_InputImage[i]) -
+				MIN) * HIGH / (MAX - MIN);
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnHistoEqual()
+{
+	int i, value;
+	unsigned char LOW, HIGH, Temp;
+	double SUM = 0.0;
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	LOW = 0;
+	HIGH = 255;
+
+	for (i = 0; i < 256; i++)
+		m_HIST[i] = LOW;
+
+	for (i = 0; i < m_size; i++) {
+		value = (int)m_InputImage[i];
+		m_HIST[value]++;
+	}
+
+	for (i = 0; i < 256; i++) {
+		SUM += m_HIST[i];
+		m_Sum_Of_HIST[i] = SUM;
+	}
+
+	
+	m_OutputImage = new unsigned char[m_Re_size];
+
+
+	for (i = 0; i < m_size; i++) {
+		Temp = m_InputImage[i];
+		m_OutputImage[i]
+			= (unsigned char)(m_Sum_Of_HIST[Temp] * HIGH / m_size);
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+
