@@ -1,0 +1,179 @@
+@import "reset.css";
+
+body {
+    background-color: black;
+    color: white;
+}
+a {
+    color: white;
+    text-decoration-line: none;
+}
+
+.container {
+    display: flex;
+    vertical-align:baseline;
+    justify-content: space-between;
+}
+
+.home {
+    margin: 20px;
+    font-size: 3em;
+    font-family:Georgia;
+}
+
+.top_list >.item {
+    position:relative;
+    display: inline-block;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+    font-size: 1.3em;
+}
+
+.top_list_2 >.item {
+    display: inline-block;
+    margin-left: 40px;
+    margin-top: 50px;
+    font-size: 1.3em;
+}
+.top_list_2 >:nth-child(2){
+    margin-right: 90px;
+}
+
+.left_list {
+    margin-top: 100px;
+    margin-left: 70px;
+    font-size: 1.2em;
+}
+
+.left_list :nth-child(2) {
+    margin-top: 50px;
+}
+
+.log {
+  position: relative;
+  margin-left: 300px;
+  margin-bottom:80px;
+  width: 76%;
+  height: 800px;
+  border: 1px solid #555175;
+  background-color:#555175;
+  opacity: 0.8;
+}
+/*일지작성*/
+.top_title{
+  position:absolute;
+  margin-left:150px;
+  margin-top:30px;
+  font-size:1.6em;
+}
+
+/*제목*/
+.log_container{
+  position:absolute;
+  margin-left:150px;
+  margin-top:50px;
+  font-size:1.3em;
+}
+
+.log_title{
+  position:absolute;
+  margin-top:30px;
+}
+/*
+.log_container{
+  position: relative;
+  justify-content: space-between;
+  align-content: center;
+}
+*/
+
+
+/*제목 입력폼*/
+.log_container>input[type="text"]{  
+  display:inline-block;
+  height:auto;
+  line-height:normal;
+  margin-top:30px;
+  font-size:1.5em;
+  padding:10px;
+  width:80%;
+  background-color:#dcdbe0; 
+  opacity: 0.8; 
+}
+
+/*내용*/
+.log_container2{
+  position:absolute;
+  margin-left:150px;
+  margin-top:80px;
+  font-size:1.3em;
+}
+
+.log_contents{
+  position:absolute;
+  margin-top:100px;
+}
+
+/*내용입력폼*/
+.log_container2>input[type="text"]{
+  display:inline-block;
+  height:auto;
+  line-height:normal;
+  margin-top:100px;
+  font-size:1.5em;
+  padding:10px;
+  width:80%;
+  background-color:#dcdbe0;  
+  opacity: 0.8;
+}
+
+/*이미지*/
+.log_container3{
+  position:absolute;
+  margin-right:10px;
+  font-size:1em;
+}
+
+.image_add{
+  position:absolute;
+  margin-top:600px;
+  margin-left:150px;
+}
+
+.input [type="file"]{
+  position:absolute;
+  display:none;
+  padding:6px 25px;
+  margin:100px;
+  background-color:orange;
+  border-radius:4px;
+  color:white;
+  cursor:pointer;
+}
+
+.log_images{
+  position:absolute;
+  margin-top:610px;
+  margin-left:150px;
+}
+
+/*등록하기*/
+.log_contaniner4{
+  position:absolute;
+  margin-left:150px;
+  margin-top:120px;
+}
+
+.enter{
+  position:absolute;
+  margin-top:660px;
+  margin-left: 1000px;
+}
+
+.lists{
+  position:absolute;
+  margin-top:700px;
+  margin-left: 1000px;
+
+}
