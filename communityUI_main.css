@@ -1,0 +1,140 @@
+@import "reset.css";
+
+body {
+    background-color: black;
+    color: white;
+}
+a {
+    color: white;
+    text-decoration-line: none;
+}
+
+.container {
+    display: flex;
+    vertical-align:baseline;
+    justify-content: space-between;
+}
+
+.home {
+    margin-top:-40px;
+    margin-left:-20px;
+    height:30vh;
+    width:20vw; 
+}
+
+
+.home>img{
+  width:100%;
+  height:100%;
+}
+
+.top_list >.item {
+    position:relative;
+    display: inline-block;
+    margin-right: 300px;
+    margin-top: 50px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.3em;
+}
+
+.home_button{
+    position:absolute;
+    margin-left:-130px;
+     margin-top:36px;
+    padding:5px;
+    height:5vh;
+    width:3vw; 
+}
+
+  
+  .home_button>img{
+    width:100%;
+    height:100%;
+  }
+
+.top_list_2 >.item {
+    display: inline-block;
+    position:absolute;
+    margin-left: -150px;
+    margin-top: 50px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1em;
+}
+
+.top_list_2 >:nth-child(2){
+    margin-right: 90px;
+}
+
+.left_list {
+    position:absolute;
+    margin-left: 70px;
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.2em;
+}
+
+.left_list :nth-child(2) {
+    margin-top: 50px;
+}
+
+.screen2 {
+    position: relative;
+     left: 300px;
+     width: 80%;
+     height: 800px;   
+     border: 1px solid #a9a9ac;
+     background-color:#a9a9ac;
+     opacity: 0.8;
+
+
+ }
+
+ /*main*/
+ 
+.env_grid3{
+    display:grid;
+      grid-template-columns:1300px;
+      grid-template-rows:700px 180px;
+      grid-gap:20px;
+      margin-left:5px;
+      margin-top:5px;
+}
+
+
+.main_images{
+    position: absolute;
+    width: 1260px;
+    height:600px;
+    padding:20px;
+    background-color:#464548;
+    border:1px solid #464548;
+}
+
+/*
+.main_env_heart{
+    position:absolute;
+    width:26px;
+    height:26px;
+    background-color:#fff;
+    border:1px sloid #fff;
+    margin-top:670px;
+    margin-left:1270px;
+  }
+
+.main_heart_btn{
+    background: url('/public/imgs/KakaoTalk_20221010_205641856.png') no-repeat -26px -261px;
+  }
+*/
+
+.main_title{
+    position:absolute;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    margin-top:670px;
+}
+
+.main_autor{
+    position:absolute;
+    margin-top: 710px;
+}
