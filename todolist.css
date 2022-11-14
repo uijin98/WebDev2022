@@ -1,0 +1,60 @@
+/** to do list */
+#content_env_todo{
+    background-color: rgba(255, 255, 255, 0);
+}
+#content_env_todo_title{
+    font-size: 3em;
+    margin-left: 20px;
+}
+#check_list div:nth-of-type(n){
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    margin-top: 30px;
+}
+input[type="checkbox"]{
+    display: none;
+}
+input[type="checkbox"] + label{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: lightgray;
+    position: relative;
+  }
+input[type="checkbox"]:checked + label::after{
+    content:'✔';
+    font-size: 25px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top:0;
+  }
+
+input[type="text"] {
+    display: inline-block;
+    height: auto; 
+    line-height: normal;
+    font-size: 1.5em;
+    padding: 10px;
+    width: 80%;
+    margin-left: 10px;
+    border: none;
+    background: transparent;
+}
+/* input[type="text"] + label{
+    width: 100%;
+			padding: 10px 20px;
+			margin: 5px 0;
+			box-sizing: border-box;
+  } */
+
+#seed1{
+    display: inline-block;
+    margin: 50px;
+}
+#seed2{
+    display: inline-block;
+    margin: 50px;
+}
