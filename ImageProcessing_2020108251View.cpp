@@ -40,6 +40,23 @@ BEGIN_MESSAGE_MAP(CImageProcessing2020108251View, CView)
 	ON_COMMAND(ID_NEGA_TRANSFORM, &CImageProcessing2020108251View::OnNegaTransform)
 	ON_COMMAND(ID_GAMMA_CORRECTION, &CImageProcessing2020108251View::OnGammaCorrection)
 	ON_COMMAND(ID_BINARIZATION, &CImageProcessing2020108251View::OnBinarization)
+	ON_COMMAND(ID_QUANTIZATION, &CImageProcessing2020108251View::OnQuantization)
+	ON_COMMAND(ID_HISTO_STRECH, &CImageProcessing2020108251View::OnHistoStrech)
+	ON_COMMAND(ID_END_IN_STRECH, &CImageProcessing2020108251View::OnEndInStrech)
+	ON_COMMAND(ID_HISTO_EQUAL, &CImageProcessing2020108251View::OnHistoEqual)
+	ON_COMMAND(ID_EMBOSSING, &CImageProcessing2020108251View::OnEmbossing1)
+	ON_COMMAND(ID_BLURR, &CImageProcessing2020108251View::OnBlurr)
+	ON_COMMAND(ID_GAUSSIAN_FILTER, &CImageProcessing2020108251View::OnGaussianFilter)
+	ON_COMMAND(ID_SHARPENING, &CImageProcessing2020108251View::OnSharpening)
+	ON_COMMAND(ID_HPF_SHARP, &CImageProcessing2020108251View::OnHpfSharp)
+	ON_COMMAND(ID_DIFF_OPERATOR_HOR, &CImageProcessing2020108251View::OnDiffOperatorHor)
+	ON_COMMAND(ID_NEAREST, &CImageProcessing2020108251View::OnNearest)
+	ON_COMMAND(ID_HOMOGEN_OPERATOR, &CImageProcessing2020108251View::OnHomogenOperator)
+	ON_COMMAND(ID_BILINEAR, &CImageProcessing2020108251View::OnBilinear)
+	ON_COMMAND(ID_BILINEAR, &CImageProcessing2020108251View::OnBilinear)
+	ON_COMMAND(ID_NEARESTX4, &CImageProcessing2020108251View::OnNearestx4)
+	ON_COMMAND(ID_BILINEARX4, &CImageProcessing2020108251View::OnBilinearx4)
+	ON_COMMAND(ID_HOMOGENOPERATOR_THRESHOLD, &CImageProcessing2020108251View::OnHomogenoperator_Threshold)
 END_MESSAGE_MAP()
 
 // CImageProcessing2020108251View 생성/소멸
@@ -300,6 +317,205 @@ void CImageProcessing2020108251View::OnBinarization()
 
 	ASSERT_VALID(pDoc);
 	pDoc->OnBinarization();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnQuantization()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnQuantization();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnHistoStrech()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnHistoStrech();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnEndInStrech()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnEndInStrech();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnHistoEqual()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnHistoEqual();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+
+
+void CImageProcessing2020108251View::OnEmbossing1()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnEmbossing();
+
+	Invalidate(TRUE);
+}
+
+
+void CImageProcessing2020108251View::OnBlurr()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnBlurr();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnGaussianFilter()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnGaussianFilter();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnSharpening()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnSharpening();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnHpfSharp()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnHpfSharp();
+
+	Invalidate(TRUE);
+
+
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnDiffOperatorHor()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnDiffOperatorHor();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnNearest()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnNearest();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnHomogenOperator()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnHomogenOperator();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+
+
+
+void CImageProcessing2020108251View::OnBilinear()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnBilinear();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnNearestx4()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnNearestx4();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnBilinearx4()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnBilinearx4();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnHomogenoperator_Threshold()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnHomogenoperator_Threshold();
 
 	Invalidate(TRUE);
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.

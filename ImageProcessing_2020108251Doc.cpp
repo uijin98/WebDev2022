@@ -724,7 +724,7 @@ void CImageProcessing2020108251Doc::OnEmbossing()
 
 
 //회선 처리가 일어나는 함수
-double** CImageProcessing2020108251Doc::OnMaskProcess(unsigned char* Target, double Mask[5][5])
+double** CImageProcessing2020108251Doc::OnMaskProcess(unsigned char* Target, double Mask[3][3])
 {
 	// TODO: 여기에 구현 코드 추가.
 	int i, j, n, m;
@@ -755,6 +755,9 @@ double** CImageProcessing2020108251Doc::OnMaskProcess(unsigned char* Target, dou
 			S = 0.0;   //다음 블록으로 이동하면 누적 값을 초기화
 		}
 	}
+	//입력 값을 위한 메모리 할당
+
+	tempInputImage = Image2DMem(m_height + 2, m_width + 2);
 	return tempOutputImage;   //결과 값 반환
 }
 
@@ -789,8 +792,8 @@ double** CImageProcessing2020108251Doc::OnScale()
 void CImageProcessing2020108251Doc::OnBlurr()
 {
 	int i, j;
-	double BlurMask[5][5] = { {1. / 25.,1. / 25.,1. / 25.,1. / 25.,1. / 25.} ,
-		{1. / 25.,1. / 25.,1. / 25.,1. / 25.,1. / 25.},{1. / 25.,1. / 25.,1. / 25.,1. / 25.,1. / 25.},{1. / 25.,1. / 25.,1. / 25.,1. / 25.,1. / 25.},{1. / 25.,1. / 25.,1. / 25.,1. / 25.,1. / 25.} };
+	//double BlurMask[5][5] = { {1. / 25.,1. / 25.,1. / 25.,1. / 25.,1. / 25.} ,
+		//{1. / 25.,1. / 25.,1. / 25.,1. / 25.,1. / 25.},{1. / 25.,1. / 25.,1. / 25.,1. / 25.,1. / 25.},{1. / 25.,1. / 25.,1. / 25.,1. / 25.,1. / 25.},{1. / 25.,1. / 25.,1. / 25.,1. / 25.,1. / 25.} };
 	// TODO: 여기에 구현 코드 추가.
 
 	m_Re_height = m_height;
@@ -798,13 +801,13 @@ void CImageProcessing2020108251Doc::OnBlurr()
 	m_Re_size = m_Re_height * m_Re_width;
 	m_OutputImage = new unsigned char[m_Re_size];
 
-	//OnMaskProcess 함수를 호출하여 회선 처리를 한다.
+	
 	m_OutputImage = new unsigned char[m_Re_size];
-	m_tempImage = OnMaskProcess(m_InputImage, BlurMask);
+	//m_tempImage = OnMaskProcess(m_InputImage, BlurMask);
 
 
 
-	//회선 처리 결과가 0~255 사이 값이 되도록 한다.
+	
 	for (i = 0; i < m_Re_height; i++) {
 		for (j = 0; j < m_Re_width; j++) {
 			if (m_tempImage[i][j] > 255)
@@ -814,11 +817,277 @@ void CImageProcessing2020108251Doc::OnBlurr()
 		}
 	}
 
-	//회선 처리 결과나 정규화 처리는 2차원 배열 값이 되므로
-	//2차원 배열을 1차원 배열로 바꾸어 출력하도록 한다.
+	
 	for (i = 0; i < m_Re_height; i++) {
 		for (j = 0; j < m_Re_width; j++) {
 			m_OutputImage[i * m_Re_width + j] = (unsigned char)m_tempImage[i][j];
 		}
 	}
+}
+
+
+void CImageProcessing2020108251Doc::OnGaussianFilter()
+{
+	int i, j;
+	double GaussianMask[3][3] = { {1. / 16.,1. / 8.,1. / 16.},{1. / 8.,1. / 4. ,1. / 8.},
+		{1. / 16.,1. / 8.,1. / 16.} };
+	// TODO: 여기에 구현 코드 추가.
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	
+	m_OutputImage = new unsigned char[m_Re_size];
+	m_tempImage = OnMaskProcess(m_InputImage, GaussianMask);
+
+
+
+
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			if (m_tempImage[i][j] > 255)
+				m_tempImage[i][j] = 255;
+			if (m_tempImage[i][j] < 0)
+				m_tempImage[i][j] = 0;
+		}
+	}
+
+
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			m_OutputImage[i * m_Re_width + j] = (unsigned char)m_tempImage[i][j];
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnSharpening()
+{
+	int i, j;
+	double SharpeningMask[3][3] = { {-1.,1.,-1.},{-1.,9.,-1.},{-1.,-1.,-1. } };
+	
+	// TODO: 여기에 구현 코드 추가.
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+	m_OutputImage = new unsigned char[m_Re_size];
+
+
+	m_OutputImage = new unsigned char[m_Re_size];
+	m_tempImage = OnMaskProcess(m_InputImage, SharpeningMask);
+
+
+
+
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			if (m_tempImage[i][j] > 255)
+				m_tempImage[i][j] = 255;
+			if (m_tempImage[i][j] < 0)
+				m_tempImage[i][j] = 0;
+		}
+	}
+
+
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			m_OutputImage[i * m_Re_width + j] = (unsigned char)m_tempImage[i][j];
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnHpfSharp()
+{
+	int i, j;
+	double HpfSharpMask[3][3] = { {-1. / 9.,-1. / 9.,-1. / 9. },{-1. / 9.,8. / 9.,-1. / 9.}, {-1. / 9.,-1. / 9.,-1. / 9. } };
+	
+	// TODO: 여기에 구현 코드 추가.
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+	m_OutputImage = new unsigned char[m_Re_size];
+
+
+	m_OutputImage = new unsigned char[m_Re_size];
+	m_tempImage = OnMaskProcess(m_InputImage, HpfSharpMask);
+
+
+
+
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			if (m_tempImage[i][j] > 255)
+				m_tempImage[i][j] = 255;
+			if (m_tempImage[i][j] < 0)
+				m_tempImage[i][j] = 0;
+		}
+	}
+
+
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			m_OutputImage[i * m_Re_width + j] = (unsigned char)m_tempImage[i][j];
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnDiffOperatorHor()
+{
+	int i, j;
+	double DiffHorMask[3][3]
+		= { {0., -1., 0.}, {0., 1., 0.}, {0., 0., 0.} };
+	// 수평 필터 선택
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+	m_OutputImage = new unsigned char[m_Re_size];
+	m_tempImage = OnMaskProcess(m_InputImage, DiffHorMask);
+
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			if (m_tempImage[i][j] > 255.)
+				m_tempImage[i][j] = 255.;
+			if (m_tempImage[i][j] < 0.)
+				m_tempImage[i][j] = 0.;
+		}
+	}
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			m_OutputImage[i * m_Re_width + j]
+				= (unsigned char)m_tempImage[i][j];
+		}
+	}
+}
+	// TODO: 여기에 구현 코드 추가.
+
+
+
+void CImageProcessing2020108251Doc::OnNearest()
+{
+	int i, j;
+	int ZoomRate = 2;
+	double** tempArray;
+
+	m_Re_height = int(ZoomRate * m_height);
+	m_Re_width = int(ZoomRate * m_width);
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_tempImage = Image2DMem(m_height, m_width);
+	tempArray = Image2DMem(m_Re_height, m_Re_width);
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	for (i = 0; i < m_height; i++) {
+		for (j = 0; j <m_width; j++) {
+			m_tempImage[i][j] = (double)m_InputImage[i * m_width + j];
+		}
+	}
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			tempArray[i][j] = m_tempImage[i / ZoomRate][j / ZoomRate];
+		}
+	}
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			m_OutputImage[i * m_Re_width + j] = (unsigned char)tempArray[i][j];
+		}
+	}
+}
+
+	
+	// TODO: 여기에 구현 코드 추가.
+
+
+
+void CImageProcessing2020108251Doc::OnHomogenOperator()
+{
+	int i, j, n, m;
+	double max, ** tempOutputImage;
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+	m_OutputImage = new unsigned char[m_Re_size];
+	m_tempImage = Image2DMem(m_height + 2, m_width + 2);
+	tempOutputImage = Image2DMem(m_Re_height, m_Re_width);
+	for (i = 0; i < m_height; i++) {
+		for (j = 0; j < m_width; j++) {
+			m_tempImage[i + 1][j + 1] = (double)m_InputImage[i * m_width + j];
+		}
+	}
+
+	for (i = 0; i < m_height; i++) {
+		for (j = 0; j < m_width; j++) {
+			max = 0.0; // 블록이 이동할 때마다 최대값 초기화
+			for (n = 0; n < 3; n++) {
+				for (m = 0; m < 3; m++) {
+					if (DoubleABS(m_tempImage[i + 1][j + 1] -
+						m_tempImage[i + n][j + m]) >= max)
+						// 블록의 가운데 값 - 블록의 주변 픽셀 값의 절대 값
+						// 중에서 최대값을 찾는다.
+						max = DoubleABS(m_tempImage[i + 1]
+							[j + 1] - m_tempImage[i + n][j + m]);
+				}
+			}
+			tempOutputImage[i][j] = max; // 찾은 최대값을 출력 값으로 지정
+		}
+	}
+
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			if (tempOutputImage[i][j] > 255.)
+				tempOutputImage[i][j] = 255.;
+			if (tempOutputImage[i][j] < 0.)
+				tempOutputImage[i][j] = 0.;
+		}
+	}
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			m_OutputImage[i * m_Re_width + j]
+				= (unsigned char)tempOutputImage[i][j];
+		}
+	}
+}
+	// TODO: 여기에 구현 코드 추가.
+
+
+
+double CImageProcessing2020108251Doc::DoubleABS(double X)
+{
+	// 실수의 절대 값 연산 함수
+	if (X >= 0)
+		return X;
+	else
+		return -X;
+}
+
+
+void CImageProcessing2020108251Doc::OnBilinear()
+{
+	int i, j, point, i_H, i_W;
+	unsigned char newValue;
+	double ZoomRate = 2.0, r_H, r_W, s_H, s_W;
+	double C1, C2, C3, C4;
+
+	m_Re_height = (int)(m_height * ZoomRate);
+	m_Re_width = (int)(m_width * ZoomRate);
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_tempImage = Image2DMem(m_height, m_width);
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	for (i = 0; i < m_height; i++) {
+		for (j = 0; j < m_width; j++) {
+			m_tempImage[i][j] = (double)m_InputImage[i * m_width + j];
+		}
+	}
+	
 }
