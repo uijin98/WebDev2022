@@ -1,0 +1,271 @@
+.mark{
+  z-index: 999;
+}
+
+
+.mark:hover{
+  cursor: pointer;
+}
+
+/* 국내 */
+
+#capital_hoverimg{
+  animation-name: hover_ani;
+  animation-duration: 0.5s;
+}
+
+#Gangwon_hoverimg{
+  animation-name: hover_ani;
+  animation-duration: 0.5s;
+}
+
+#Dokdo_hoverimg{
+  animation-name: hover_ani;
+  animation-duration: 0.5s;
+}
+
+#Busan_hoverimg{
+  animation-name: hover_ani;
+  animation-duration: 0.5s;
+}
+
+#Jeju_hoverimg{
+  animation-name: hover_ani;
+  animation-duration: 0.5s;
+}
+
+/* 세계 */
+
+#europe_hoverimg{
+  animation-name: hover_ani;
+  animation-duration: 0.5s;
+}
+
+#Africa_hoverimg{
+  animation-name: hover_ani;
+  animation-duration: 0.5s;
+}
+
+#UnitedArabEmirates_hoverimg{
+  animation-name: hover_ani;
+  animation-duration: 0.5s;
+}
+
+
+#Australia_hoverimg{
+  animation-name: hover_ani;
+  animation-duration: 0.5s;
+}
+
+#China_hoverimg{
+  animation-name: hover_ani;
+  animation-duration: 0.5s;
+}
+
+#Brazill_hoverimg{
+  animation-name: hover_ani;
+  animation-duration: 0.5s;
+}
+
+@keyframes hover_ani{
+  from{
+   opacity: 0.8;
+  }
+
+   to{
+    opacity: 1;
+ }
+}
+
+/* 깃발ani */
+
+/* 국내 */
+
+#capital_flag{
+  animation-name: cap_flag_ani;
+  animation-duration: 1s;
+}
+
+@keyframes cap_flag_ani{
+  from{
+   opacity: 0;
+   top:90px;
+  }
+
+   to{
+    opacity: 1;
+    top:106px;
+ }
+}
+
+#Gangwon_flag{
+  animation-name: Gan_flag_ani;
+  animation-duration: 1s;
+}
+
+@keyframes Gan_flag_ani{
+  from{
+   opacity: 0;
+   top:87px;
+  }
+
+   to{
+    opacity: 1;
+    top:103px;
+ }
+}
+
+#Dokdo_flag{
+  animation-name: Dok_flag_ani;
+  animation-duration: 1s;
+}
+
+@keyframes Dok_flag_ani{
+  from{
+   opacity: 0;
+   top:51px;
+  }
+
+   to{
+    opacity: 1;
+    top:67px;
+ }
+}
+
+#Busan_flag{
+  animation-name: Bus_flag_ani;
+  animation-duration: 1s;
+}
+
+@keyframes Bus_flag_ani{
+  from{
+   opacity: 0;
+   top:302px;
+  }
+
+   to{
+    opacity: 1;
+    top:318px;
+}
+}
+
+#Jeju_flag{
+  animation-name: Jej_flag_ani;
+  animation-duration: 1s;
+}
+
+@keyframes Jej_flag_ani{
+  from{
+   opacity: 0;
+   top:559px;
+  }
+
+   to{
+    opacity: 1;
+    top:575px;
+}
+}
+
+/* 세계 */
+
+#europe_flag{
+  animation-name: eur_flag_ani;
+  animation-duration: 1s;
+}
+
+@keyframes eur_flag_ani{
+  from{
+   opacity: 0;
+   top:167px;
+  }
+
+   to{
+    opacity: 1;
+    top:183px;
+}
+}
+
+#Africa_flag{
+  animation-name: Afr_flag_ani;
+  animation-duration: 1s;
+}
+
+@keyframes Afr_flag_ani{
+  from{
+   opacity: 0;
+   top:294px;
+  }
+
+   to{
+    opacity: 1;
+    top:310px;
+}
+}
+
+#UnitedArabEirates_flag{
+  animation-name: Uni_flag_ani;
+  animation-duration: 1s;
+}
+
+@keyframes Uni_flag_ani{
+  from{
+   opacity: 0;
+   top:254px;
+  }
+
+   to{
+    opacity: 1;
+    top:270px;
+}
+}
+
+#Australia_flag{
+  animation-name: Aus_flag_ani;
+  animation-duration: 1s;
+}
+
+@keyframes Aus_flag_ani{
+  from{
+   opacity: 0;
+   top:399px;
+  }
+
+   to{
+    opacity: 1;
+    top:415px;
+}
+}
+
+#China_flag{
+  animation-name: Chi_flag_ani;
+  animation-duration: 1s;
+}
+
+@keyframes Chi_flag_ani{
+  from{
+   opacity: 0;
+   top:212px;
+  }
+
+   to{
+    opacity: 1;
+    top:228px;
+}
+}
+
+#Brazill_flag{
+  animation-name: Bra_flag_ani;
+  animation-duration: 1s;
+}
+
+@keyframes Bra_flag_ani{
+  from{
+   opacity: 0;
+   top:374px;
+  }
+
+   to{
+    opacity: 1;
+    top:390px;
+}
+}
