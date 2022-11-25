@@ -1,0 +1,46 @@
+.modal {
+  height: 500px;
+  width: 1000px;
+  z-index: 99999;
+  background-color: #E7E7E7;
+  position: absolute;
+  margin: 20px;
+  border-radius: 3px;
+  padding: 20px 20px 20px 20px;
+  display: none;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-name: modal_ani;
+  animation-duration: 2s;
+}
+
+@keyframes modal_ani{
+  from{
+   opacity: 0;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+
+  }
+
+   to{
+    opacity: 1;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   
+   }
+ }
+
+
+
+.modal .modal_close {
+  width: 10px;
+  height: 10px;
+  z-index: 6;
+  position: absolute;
+  color: black;
+  right: 20px;
+  cursor: pointer;
+}
