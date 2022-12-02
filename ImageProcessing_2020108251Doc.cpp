@@ -16,6 +16,8 @@
 #include "CDownSampleDlg.h"
 #include "CConstantDlg.h"
 #include "CUpSampleDlg.h"
+#include "CimageScale.h"
+#include "CImageTranslation.h"
 
 
 #ifdef _DEBUG
@@ -1074,8 +1076,13 @@ void CImageProcessing2020108251Doc::OnBilinear()
 {
 	int i, j, point, i_H, i_W;
 	unsigned char newValue;
-	double ZoomRate = 2.0, r_H, r_W, s_H, s_W;
+	double ZoomRate, r_H, r_W, s_H, s_W;
 	double C1, C2, C3, C4;
+	CimageScale dlg;
+
+	if (dlg.DoModal() == IDOK) {
+		ZoomRate = dlg.m_Scale;
+	}
 
 	m_Re_height = (int)(m_height * ZoomRate);
 	m_Re_width = (int)(m_width * ZoomRate);
@@ -1090,4 +1097,338 @@ void CImageProcessing2020108251Doc::OnBilinear()
 		}
 	}
 	
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			r_H = i / ZoomRate;
+			r_W = j / ZoomRate;
+
+			i_H = (int)floor(r_H);
+			i_W = (int)floor(r_W);
+
+			s_H = r_H - i_H;
+			s_W = r_W - i_W;
+
+			if (i_H < 0 || i_H >= (m_height - 1) || i_W < 0
+				|| i_W >= (m_width - 1))
+			{
+				point = i * m_Re_width + j;
+				m_OutputImage[point] = 255;
+			}
+
+			else
+			{
+				C1 = (double)m_tempImage[i_H][i_W];
+				C2 = (double)m_tempImage[i_H][i_W+1];
+				C3 = (double)m_tempImage[i_H+1][i_W+1];
+				C4 = (double)m_tempImage[i_H+1][i_W];
+
+				newValue = (unsigned char)(C1 * (1 - s_H) * (1 - s_W)
+					+ C2 * s_W * (1 - s_H) + C3 * s_W * s_H + C4 * (1 - s_W) * s_H);
+				point = i * m_Re_width + j;
+				m_OutputImage[point] = newValue;
+			}
+		}
+	}
+}
+
+
+void CImageProcessing2020108251Doc::OnNearestx4()
+{
+	int i, j;
+	int ZoomRate = 4;
+	double** tempArray;
+
+	m_Re_height = int(ZoomRate * m_height);
+	m_Re_width = int(ZoomRate * m_width);
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_tempImage = Image2DMem(m_height, m_width);
+	tempArray = Image2DMem(m_Re_height, m_Re_width);
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	for (i = 0; i < m_height; i++) {
+		for (j = 0; j < m_width; j++) {
+			m_tempImage[i][j] = (double)m_InputImage[i * m_width + j];
+		}
+	}
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			tempArray[i][j] = m_tempImage[i / ZoomRate][j / ZoomRate];
+		}
+	}
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			m_OutputImage[i * m_Re_width + j] = (unsigned char)tempArray[i][j];
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnBilinearx4()
+{
+	int i, j, point, i_H, i_W;
+	unsigned char newValue;
+	double ZoomRate = 4.0, r_H, r_W, s_H, s_W;
+	double C1, C2, C3, C4;
+
+	m_Re_height = (int)(m_height * ZoomRate);
+	m_Re_width = (int)(m_width * ZoomRate);
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_tempImage = Image2DMem(m_height, m_width);
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	for (i = 0; i < m_height; i++) {
+		for (j = 0; j < m_width; j++) {
+			m_tempImage[i][j] = (double)m_InputImage[i * m_width + j];
+		}
+	}
+
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			r_H = i / ZoomRate;
+			r_W = j / ZoomRate;
+
+			i_H = (int)floor(r_H);
+			i_W = (int)floor(r_W);
+
+			s_H = r_H - i_H;
+			s_W = r_W - i_W;
+
+			if (i_H < 0 || i_H >= (m_height - 1) || i_W < 0
+				|| i_W >= (m_width - 1))
+			{
+				point = i * m_Re_width + j;
+				m_OutputImage[point] = 255;
+			}
+
+			else
+			{
+				C1 = (double)m_tempImage[i_H][i_W];
+				C2 = (double)m_tempImage[i_H][i_W + 1];
+				C3 = (double)m_tempImage[i_H + 1][i_W + 1];
+				C4 = (double)m_tempImage[i_H + 1][i_W];
+
+				newValue = (unsigned char)(C1 * (1 - s_H) * (1 - s_W)
+					+ C2 * s_W * (1 - s_H) + C3 * s_W * s_H + C4 * (1 - s_W) * s_H);
+				point = i * m_Re_width + j;
+				m_OutputImage[point] = newValue;
+			}
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnHomogenoperator_Threshold()
+{
+	int i, j, n, m;
+	double max, ** tempOutputImage;
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+	m_OutputImage = new unsigned char[m_Re_size];
+	m_tempImage = Image2DMem(m_height + 2, m_width + 2);
+	tempOutputImage = Image2DMem(m_Re_height, m_Re_width);
+	for (i = 0; i < m_height; i++) {
+		for (j = 0; j < m_width; j++) {
+			m_tempImage[i + 1][j + 1] = (double)m_InputImage[i * m_width + j];
+		}
+	}
+
+	for (i = 0; i < m_height; i++) {
+		for (j = 0; j < m_width; j++) {
+			max = 0.0; // 블록이 이동할 때마다 최대값 초기화
+			for (n = 0; n < 3; n++) {
+				for (m = 0; m < 3; m++) {
+					if (DoubleABS(m_tempImage[i + 1][j + 1] -
+						m_tempImage[i + n][j + m]) >= max)
+						// 블록의 가운데 값 - 블록의 주변 픽셀 값의 절대 값
+						// 중에서 최대값을 찾는다.
+						max = DoubleABS(m_tempImage[i + 1]
+							[j + 1] - m_tempImage[i + n][j + m]);
+				}
+			}
+			tempOutputImage[i][j] = max; // 찾은 최대값을 출력 값으로 지정
+		}
+	}
+
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			if (tempOutputImage[i][j] > 255.)
+				tempOutputImage[i][j] = 255.;
+			if (tempOutputImage[i][j] < 0.)
+				tempOutputImage[i][j] = 0.;
+		}
+	}
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			m_OutputImage[i * m_Re_width + j]
+				= (unsigned char)tempOutputImage[i][j];
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnMedianSub()
+{
+	int i, j, n, m, M = 4, index = 0;
+	double* Mask, Value;
+
+	Mask = new double[M * M];
+
+	m_Re_height = m_height/M;
+	m_Re_width = m_width/M;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+	m_tempImage = Image2DMem(m_height + 1, m_width + 1);
+
+	for (i = 0; i < m_height; i++) {
+		for (j = 0; j < m_width; j++) {
+			m_tempImage[i][j] = (double)m_InputImage[i * m_width + j];
+		}
+	}
+
+	for (i = 0; i < m_height - 1; i = i + M) {
+		for (j = 0; j < m_width - 1; j = j + M) {
+			for (n = 0; n < M; n++) {
+				for (m = 0; m < M; m++) {
+					Mask[n * M + m] = m_tempImage[i + n][j + m];
+					//입력 영상을 블록으로 잘라 마스크 배열에 저장
+				}
+			}
+			OnBubleSort(Mask, M * M); //마스크에 저장된 값을 정렬
+			Value = Mask[(int)(M * M / 2)]; //정렬된 값 중 가운데 값을 선택
+			m_OutputImage[index] = (unsigned char)Value;
+			//가운데 값을 출력
+
+			index++;
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnBubleSort(double *A, int MAX)
+{
+	int i, j;
+	for (i = 0; i < MAX; i++) {
+		for (j = 0; j < MAX - 1; j++) {
+			if (A[j] > A[j + 1]) {
+				OnSwap(&A[j], &A[j + 1]);
+			}
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnSwap(double *a, double *b)
+{
+	double temp;
+	temp = *a;
+	*a = *b;
+	*b = temp;
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnMeanSub()
+{
+	int i, j, n, m, M = 0, index = 0,k;
+	double* Mask, Value, Sum = 0.0;
+	CimageScale dlg;
+
+	if (dlg.DoModal() == IDOK) {
+		M = dlg.m_Scale;
+	}
+	Mask = new double[M * M];
+
+	m_Re_height = m_height/M;
+	m_Re_width = m_width/M;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+	m_tempImage = Image2DMem(m_height + 1, m_width + 1);
+
+	for (i = 0; i < m_height; i++) {
+		for (j = 0; j < m_width; j++) {
+			m_tempImage[i][j] = (double)m_InputImage[i * m_width + j];
+		}
+	}
+
+	for (i = 0; i < m_height - 1; i = i + M) {
+		for (j = 0; j < m_width - 1; j = j + M) {
+			for (n = 0; n < M; n++) {
+				for (m = 0; m < M; m++) {
+					Mask[n * M + m] = m_tempImage[i + n][j + m];
+					//입력 영상을 블록으로 잘라 마스크 배열에 저장
+				}
+			}
+			for (k = 0; k < M * M; k++)
+				Sum = Sum + Mask[k];
+
+			Value = (Sum / (M * M));
+			m_OutputImage[index] = (unsigned char)Value;
+
+			index++;
+			Sum = 0.0;
+		}
+	}
+	// TODO: 여기에 구현 코드 추가.
+}
+
+
+void CImageProcessing2020108251Doc::OnTranslation()
+{
+	int i, j;
+	int h_pos = 30, w_pos = 130;
+	double **tempArray;
+
+	CImageTranslation dlg;
+
+	if (dlg.DoModal() == IDOK) {
+		h_pos = dlg.m_TranslationX;
+	}
+
+	if (dlg.DoModal() == IDOK) {
+		w_pos = dlg.m_TranslationY;
+	}
+
+	m_Re_height = m_height;
+	m_Re_width = m_width;
+	m_Re_size = m_Re_height * m_Re_width;
+
+	m_OutputImage = new unsigned char[m_Re_size];
+
+	m_tempImage = Image2DMem(m_height, m_width);
+	tempArray = Image2DMem(m_Re_height, m_Re_width);
+
+	for (i = 0; i < m_height; i++) {
+		for (j = 0; j < m_width; j++) {
+			m_tempImage[i][j] = (double)m_InputImage[i * m_width + j];
+
+		}
+	}
+
+	for (i = 0; i < m_height - h_pos; i++) {
+		for (j = 0; j < m_width - w_pos; j++) {
+			tempArray[i + h_pos][j + w_pos] = m_tempImage[i][j];
+		}
+	}
+
+	for (i = 0; i < m_Re_height; i++) {
+		for (j = 0; j < m_Re_width; j++) {
+			m_OutputImage[i * m_Re_width + j]
+				= (unsigned char)tempArray[i][j];
+		}
+	}
+
+	delete[]m_tempImage;
+	delete[]tempArray;
+	// TODO: 여기에 구현 코드 추가.
 }

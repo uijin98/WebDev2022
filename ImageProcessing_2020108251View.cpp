@@ -57,6 +57,10 @@ BEGIN_MESSAGE_MAP(CImageProcessing2020108251View, CView)
 	ON_COMMAND(ID_NEARESTX4, &CImageProcessing2020108251View::OnNearestx4)
 	ON_COMMAND(ID_BILINEARX4, &CImageProcessing2020108251View::OnBilinearx4)
 	ON_COMMAND(ID_HOMOGENOPERATOR_THRESHOLD, &CImageProcessing2020108251View::OnHomogenoperator_Threshold)
+	ON_COMMAND(ID_MEDIAN_SUB, &CImageProcessing2020108251View::OnMedianSub)
+	ON_COMMAND(ID_MEAN_SUB, &CImageProcessing2020108251View::OnMeanSub)
+	ON_COMMAND(ID_m_Scale, &CImageProcessing2020108251View::OnmScale)
+	ON_COMMAND(ID_TRANSLATION, &CImageProcessing2020108251View::OnTranslation)
 END_MESSAGE_MAP()
 
 // CImageProcessing2020108251View 생성/소멸
@@ -516,6 +520,49 @@ void CImageProcessing2020108251View::OnHomogenoperator_Threshold()
 
 	ASSERT_VALID(pDoc);
 	pDoc->OnHomogenoperator_Threshold();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnMedianSub()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnMedianSub();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnMeanSub()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnMeanSub();
+
+	Invalidate(TRUE);
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+
+void CImageProcessing2020108251View::OnmScale()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+}
+
+
+void CImageProcessing2020108251View::OnTranslation()
+{
+	CImageProcessing2020108251Doc* pDoc = GetDocument();
+
+	ASSERT_VALID(pDoc);
+	pDoc->OnTranslation();
 
 	Invalidate(TRUE);
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
